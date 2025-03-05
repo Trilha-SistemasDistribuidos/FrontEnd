@@ -6,6 +6,7 @@ import NotFound from "./pages/NotFound";
 import Home from './pages/dashboard/Home'
 import CadastroTrilha from "./pages/dashboard/Guia/CadastroTrilha";
 import CadastroCategoria from "./pages/dashboard/Guia/CadastroCategoria";
+import Cadastros from "./pages/dashboard/Guia/Cadastros";
 
 function AppRoutes() {
   return (
@@ -23,6 +24,7 @@ function AppRoutes() {
 
             
             {/* Rotas do guia */}
+            <Route path="/guia/cadastros" element={<Cadastros />} />
             <Route path='/guia/cadastro_trilha' element = {<CadastroTrilha/>} />
             <Route path='/guia/cadastro_categoria' element = {<CadastroCategoria/>} />
 
