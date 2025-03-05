@@ -3,7 +3,9 @@ import LandingPage from "./pages/dashboard/LandingPage";
 import Login from "./pages/auth/Login"
 import Cadastro from "./pages/auth//Cadastro";
 import NotFound from "./pages/NotFound";
-
+import Home from './pages/dashboard/Home'
+import CadastroTrilha from "./pages/dashboard/Guia/CadastroTrilha";
+import CadastroCategoria from "./pages/dashboard/Guia/CadastroCategoria";
 
 function AppRoutes() {
   return (
@@ -12,7 +14,7 @@ function AppRoutes() {
             {/* Página inicial */}
             <Route path="/" element={<LandingPage />} />
             <Route path="*" element={<NotFound />} />
-
+      <Route path = "/home" element={<Home />} /> 
             {/* Rotas de autenticação */}
             <Route path="/auth/login" element={<Login />} />
       
@@ -21,7 +23,9 @@ function AppRoutes() {
 
             
             {/* Rotas do guia */}
-            
+            <Route path='/guia/cadastro_trilha' element = {<CadastroTrilha/>} />
+            <Route path='/guia/cadastro_categoria' element = {<CadastroCategoria/>} />
+
           </Routes>
       </Router>
   );

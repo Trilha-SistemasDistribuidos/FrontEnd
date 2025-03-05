@@ -4,7 +4,7 @@ import Input from "../../components/Input";
 import { useLogin } from "../../hooks/useLogin";
 
 const Login = () => {
-  const { email, password, errorMessage, setEmail, setPassword, handleLogin } = useLogin();
+  const { username, password, errorMessage, setUsername, setPassword, handleLogin } = useLogin();
 
   return (
     <div className="flex flex-col w-screen h-screen justify-center items-center p-4">
@@ -12,7 +12,7 @@ const Login = () => {
         <img src={imgLogo} alt="Logo EcoTrilha" className="w-64 mr-2" />
       </h1>
 
-      <Input value={email} onChange={(e) => setEmail(e.target.value)} title={"E-mail"} tipo={'text'} placeholder={"Digite seu E-mail"} />
+      <Input value={username} onChange={(e) => setUsername(e.target.value)} title={"UserName"} tipo={'text'} placeholder={"Digite seu UserName"} />
       <Input value={password} onChange={(e) => setPassword(e.target.value)} title = {"Senha"} tipo = {"password"} placeholder={"Digite sua senha"}/>
 
       <div className="w-full sm:w-3/4 md:w-1/2 lg:w-1/3 flex flex-col">

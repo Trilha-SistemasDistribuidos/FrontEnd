@@ -2,7 +2,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { FaChevronCircleLeft } from "react-icons/fa";
 
-const BackButton = ({ path, style }) => {
+const BackButton = ({ path, }) => {
   const navigate = useNavigate();
 
   const handleBack = () => {
@@ -19,9 +19,9 @@ const BackButton = ({ path, style }) => {
   return (
     <button
       onClick={handleBack}
-      className={`flex items-center bg-[#2D8C50] ${style}`}
+      className={`flex items-center bg-transparent `}
     >
-      <FaChevronCircleLeft className="w-6 h-6 bg-white" />
+      <FaChevronCircleLeft className="w-6 h-6 text-white" />
       <span className="text-sm sm:text-base"></span>
     </button>
   );
