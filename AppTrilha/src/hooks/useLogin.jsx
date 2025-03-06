@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ApiUser } from "../axios-config"
+import { ApiUser } from "../axios-config";
 
 export const useLogin = () => {
   const [username, setUsername] = useState("");
@@ -9,24 +9,27 @@ export const useLogin = () => {
   const handleLogin = async () => {
     try {
       const response = await ApiUser.post("/api/token/", { username, password });
-      console.log(response)
+      console.log(response);
+
       localStorage.setItem("accessToken", response.data.access);
       localStorage.setItem("refreshToken", response.data.refresh);
 
-      const user = await ApiUser.get("/api/usuario/", {
+      const usersResponse = await ApiUser.get("/api/usuario/", {
         headers: {
           Authorization: `Bearer ${response.data.access}`,
         },
       });
 
-      localStorage.setItem("user", JSON.stringify(user.data[0]));
-      console.log(localStorage.getItem('user'))
-      
-     // if (user.data[0].tipo === "Aventureiro") {
-       // window.location.href = "/home";
-      //} else {
-      //  window.location.href = "/home";
-     // }
+      // Filtra o usuário correto pelo username
+      const user = usersResponse.data.find((u) => u.username === username);
+
+      if (user) {
+        localStorage.setItem("user", JSON.stringify(user));
+        console.log(localStorage.getItem("user"));
+        window.location.href = "/home";
+      } else {
+        setErrorMessage("Usuário não encontrado.");
+      }
     } catch (error) {
       setErrorMessage(
         error.response?.data?.detail || "Erro ao realizar login. Tente novamente."

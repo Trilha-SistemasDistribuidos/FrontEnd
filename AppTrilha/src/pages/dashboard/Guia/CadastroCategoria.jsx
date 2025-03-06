@@ -45,7 +45,7 @@ function CadastroCategoria() {
 
   return (
     <div className="flex flex-col items-center text-center h-full bg-gray-50">
-      <PageHeader title="Cadastrar Categoria" path="/home" />
+      <PageHeader title="Cadastrar Categoria" path="/guia/cadastros" />
 
       <main className="w-full my-30 px-6 flex flex-col items-center space-y-8">
         <div className="w-full flex flex-col items-center">

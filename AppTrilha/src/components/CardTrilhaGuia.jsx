@@ -16,7 +16,6 @@ const CardTrilha = ({ trilha }) => {
   const { name, difficulty, description, location, length_km, category_id } = trilha;
   const dificuldadeEstilo = dificuldadeCores[difficulty] || dificuldadeCores["easy"];
   const navigate = useNavigate()
-  const userTipo = JSON.parse(localStorage.getItem("user")).tipo
 
   // Função para buscar a categoria pelo ID
   const fetchCategory = async (id) => {
@@ -28,13 +27,7 @@ const CardTrilha = ({ trilha }) => {
       console.error("Erro ao buscar categoria:", error);
     }
   };
-  
-  const handleCardClick = () => {
-    if (userTipo !== "Guia") {
-      navigate(`/aventureiro/detalhestrilha/${trilha.id}`);
-    }
-  };
-  
+
   useEffect(() => {
     if (category_id) {
       fetchCategory(category_id);
@@ -43,7 +36,7 @@ const CardTrilha = ({ trilha }) => {
 
   return (
     <div
-      onClick={handleCardClick}
+      onClick={() => navigate(`/aventureiro/detalhestrilhaguia/${trilha.id}`)}
       className="bg-white p-2rounded-lg shadow-md hover:shadow-xl transition-all mb-5 h-[250px] duration-300 cursor-pointer"
     >
       <img src={logo} alt={name} className="w-[100%] h-[35%] mx-auto mb-5" />

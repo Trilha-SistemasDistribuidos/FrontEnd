@@ -7,7 +7,8 @@ import PageHeader from "../../../components/Header";
 
 function CadastroTrilha() {
   const navigate = useNavigate();
-
+  const [dateTime,setDateTime] = useState("");
+  const [image, setImage] = useState(null);
   const [name, setNome] = useState("");
   const [description, setDescricao] = useState("");
   const [location, setLocation] = useState("");
@@ -28,25 +29,31 @@ function CadastroTrilha() {
     };
     fetchCategories();
   }, []);
-
+  const guiaId = JSON.parse(localStorage.getItem('user')).id
   const criarTrilha = async () => {
     setLoading(true);
     let accessToken = localStorage.getItem("accessToken");
-
+  
     if (!accessToken) {
       alert("Sessão expirada. Faça login novamente.");
       navigate("/auth/login");
       return;
     }
-
+  
+    
     const formData = new FormData();
+    formData.append("user_id",guiaId)
     formData.append("name", name);
     formData.append("description", description);
     formData.append("location", location);
     formData.append("difficulty", difficulty);
     formData.append("length_km", lengthKm);
     formData.append("category_id", Number(category));
-
+    formData.append("date_time", dateTime); 
+    if (image) {
+      formData.append("image", image);
+    }
+  
     try {
       await ApiTrilhas.post("/api/trails/", formData, {
         headers: { Authorization: `Bearer ${accessToken}` },
@@ -60,10 +67,11 @@ function CadastroTrilha() {
       setLoading(false);
     }
   };
+  
 
   return (
     <div className="flex flex-col items-center text-center h-full bg-gray-50">
-      <PageHeader title="Cadastrar Trilha" type="guia" path="/home" />
+      <PageHeader title="Cadastrar Trilha" type="guia" path="/guia/cadastros" />
 
       <main className="w-full my-30 px-6 flex flex-col items-center space-y-8">
         <div className="w-full flex flex-col items-center">
@@ -71,6 +79,13 @@ function CadastroTrilha() {
           <Input placeholder="Descrição" tipo="text" title="Descrição" onChange={(e) => setDescricao(e.target.value)} />
           <Input placeholder="Localização" tipo="text" title="Localização" onChange={(e) => setLocation(e.target.value)} />
           <Input placeholder="Comprimento (km)" tipo="number" title="Distância (km)" onChange={(e) => setLengthKm(e.target.value)} />
+          <Input tipo="file" title="Imagem" onChange={(e) => setImage(e.target.files[0])} />
+          <Input
+            title="Data e Hora"
+            tipo="datetime-local"
+            value={dateTime}
+            onChange={(e) => setDateTime(e.target.value)}
+          />
 
           <Input
             title="Categoria"
@@ -110,7 +125,7 @@ function CadastroTrilha() {
         </button>
       </main>
 
-      <Footer type="guia" />
+      <Footer />
     </div>
   );
 }

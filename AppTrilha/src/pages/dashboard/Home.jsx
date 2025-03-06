@@ -13,7 +13,6 @@ function Home() {
   useEffect(() => {
     ApiTrilhas.get('/api/trails')
       .then(response => {
-        console.log(response.data); // Verifique o que está sendo retornado
         setTrails(response.data); // Define os dados no estado
       })
       .catch(error => console.error("Erro ao buscar trilhas:", error));
