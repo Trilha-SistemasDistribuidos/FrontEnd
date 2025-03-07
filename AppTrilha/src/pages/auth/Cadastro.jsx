@@ -1,16 +1,19 @@
 import Input from "../../components/Input";
 import useCadastro from '../../hooks/useCadastro'
-import BackButton from "../../components/BackButton";
+import { useNavigate } from "react-router-dom";
 import { FaGoogle } from 'react-icons/fa';
+import { FaChevronCircleLeft } from "react-icons/fa";
 
 
 const CadastroGuia = () => { 
   const { formData, handleChange, handleSubmit, loading, error, success } = useCadastro();
-
+  const navigate = useNavigate();
   return (
     <div className="flex flex-col w-screen h-auto justify-center items-center p-4">
       <div className="w-full flex justify-start">
-        <BackButton path={"/auth/login"} style="top-8 left-4 z-50" />
+        <button onClick={()=>navigate('/auth/login')} style="flex items-center bg-green-600 left-4 z-50">
+          <FaChevronCircleLeft className="w-6 h-6 text-white"/>
+        </button>
       </div>
       <h2 className="font-bold text-3xl mb-6 sm:text-2xl md:text-3xl mt-4">Cadastre-se</h2>
 

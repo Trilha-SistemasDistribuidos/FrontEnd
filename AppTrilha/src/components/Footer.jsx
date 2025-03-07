@@ -20,7 +20,6 @@ function Footer() {
       ? [
           { icon: <FaMapMarked className="w-6 h-6" />, label: "Explorar", path: "/home" },
           { icon: <FaRegCalendarAlt className="w-6 h-6" />, label: "Agenda", path: "/aventureiro/agenda" },
-          { icon: <FaScrewdriverWrench className="w-6 h-6" />, label: "Ajustes", path: "/aventureiro/ajustes" },
           { icon: <IoMdPerson className="w-6 h-6" />, label: "Perfil", path: "/perfil" },
         ]
       : [

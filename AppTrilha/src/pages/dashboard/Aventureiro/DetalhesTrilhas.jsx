@@ -95,7 +95,7 @@ function DetalhesTrilha() {
               </button>
             ) : isBooked === null ? ( // Enquanto estamos esperando a resposta, exibe um botão genérico
               <button
-                className="bg-gray-500 w-[50%] text-white py-2 px-4 rounded"
+                className="bg-gray-500 w-[100%] text-white py-2 px-4 rounded"
                 disabled
               >
                 --------
