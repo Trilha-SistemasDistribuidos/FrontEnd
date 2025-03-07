@@ -73,7 +73,7 @@ const Reviews = () => {
     }
   };
   if (loading) return <p>Carregando...</p>;
-  if (error) return <p>{error}</p>;
+
 
   return (
     <div className="p-6">
