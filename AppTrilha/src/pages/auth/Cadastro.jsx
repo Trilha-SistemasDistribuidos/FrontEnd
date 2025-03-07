@@ -11,7 +11,7 @@ const CadastroGuia = () => {
   return (
     <div className="flex flex-col w-screen h-auto justify-center items-center p-4">
       <div className="w-full flex justify-start">
-        <button onClick={()=>navigate('/auth/login')} style="flex items-center bg-green-600 left-4 z-50">
+        <button onClick={()=>navigate('/auth/login')} className = "flex items-center bg-green-600 rounded-full left-4 z-50">
           <FaChevronCircleLeft className="w-6 h-6 text-white"/>
         </button>
       </div>
