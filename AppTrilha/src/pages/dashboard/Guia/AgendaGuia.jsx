@@ -5,6 +5,7 @@ import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css"; 
 import Header from "../../../components/Header";
 import Footer from "../../../components/Footer";
+import CartaoGuiaTrilha from '../../../components/CartaoGuiaTrilha'
 
 function AgendaGuia() {
   const [trilhas, setTrilhas] = useState([]); // Todas as trilhas do usuário
@@ -83,7 +84,7 @@ function AgendaGuia() {
               <div key={trilha.id} className="flex flex-col ">
                 {/* Exibe a data e hora acima do card */}
                 <p className="text-lg font-semibold mb-2 text-gray-600">{formatarDataHora(trilha.date_time)}</p>
-                <CardTrilhaGuia trilha={trilha} />
+                <CartaoGuiaTrilha trilha={trilha} />
               </div>
             ))}
           </div>

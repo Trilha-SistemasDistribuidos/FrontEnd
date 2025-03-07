@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { ApiTrilhas, ApiAgendamentos } from '../../../axios-config/index';
 import { FiLoader } from 'react-icons/fi'; // Ícone de carregamento
 import Header from '../../../components/Header';
@@ -13,7 +13,7 @@ function DetalhesTrilha() {
   const [isBooked, setIsBooked] = useState(null); // Inicializa como null para indicar que estamos esperando a resposta
   const [isLoadingBooking, setIsLoadingBooking] = useState(false); // Para gerenciar o carregamento do agendamento
   const [message, setMessage] = useState(""); // Mensagem de feedback para o usuário
-
+  const navigate = useNavigate();
   // Função para verificar se a trilha já foi agendada
   const checkIfBooked = async () => {
     const user_id = JSON.parse(localStorage.getItem("user")).id;
@@ -75,7 +75,7 @@ function DetalhesTrilha() {
     }
     setIsLoadingBooking(false); // Finaliza o carregamento
   };
-
+  console.log(trail)
   if (loading) return <p>Carregando...</p>;
 
   return (
@@ -84,7 +84,7 @@ function DetalhesTrilha() {
       <main className="container mx-auto my-20 p-4 pt-20">
         <div>
           <CardTrilha trilha={trail} />
-          <div className="mt-4 flex gap-4">
+          <div className="mt-4 flex flex-col items-center gap-4">
             {isLoadingBooking ? (
               <button 
                 className="bg-gray-500 text-white w-[50%] py-2 px-4 rounded"
@@ -102,21 +102,24 @@ function DetalhesTrilha() {
               </button>
             ) : isBooked ? (
               <button
-                className="bg-red-600 w-[50%] text-white py-2 px-4 rounded"
+                className="bg-red-600 w-[100%] text-white py-2 px-4 rounded"
                 onClick={handleBooking}
               >
                 Cancelar Trilha
               </button>
             ) : (
               <button
-                className="bg-green-600 w-[50%] text-white py-2 px-4 rounded"
+                className="bg-green-600 w-[100%] text-white py-2 px-4 rounded"
                 onClick={handleBooking}
               >
                 Agendar Trilha
               </button>
             )}
-            <button className="bg-blue-600 w-[50%] text-white py-2 px-4 rounded">
+            <button className="bg-blue-600 w-[100%] text-white py-2 px-4 rounded" onClick={()=>navigate(`/reviews/${trail.user_id}`)}>
               Ver Reviews
+            </button>
+            <button  onClick ={()=> navigate(`/inscritos/${id}`)} className="bg-blue-600 w-[100%] text-white py-2 px-4 rounded">
+              Ver Inscritos
             </button>
           </div>
           {/* Exibe a mensagem de feedback para o usuário */}

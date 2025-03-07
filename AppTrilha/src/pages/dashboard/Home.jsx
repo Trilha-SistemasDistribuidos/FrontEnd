@@ -8,14 +8,19 @@ import CardTrilha from '../../components/CardTrilha.jsx';
 function Home() {
   const [trails, setTrails] = useState([]); // Lista de trilhas
   const [search, setSearch] = useState(""); // Barra de pesquisa
+  const [loading, setLoading] = useState(true); // Estado para controle de carregamento
 
   // Função para buscar trilhas da API
   useEffect(() => {
     ApiTrilhas.get('/api/trails')
       .then(response => {
         setTrails(response.data); // Define os dados no estado
+        setLoading(false); // Atualiza o estado para indicar que o carregamento terminou
       })
-      .catch(error => console.error("Erro ao buscar trilhas:", error));
+      .catch(error => {
+        console.error("Erro ao buscar trilhas:", error);
+        setLoading(false); // Se houver erro, também termina o carregamento
+      });
   }, []);
   
   const filteredTrails = search
@@ -23,10 +28,6 @@ function Home() {
         trail.name.toLowerCase().includes(search.toLowerCase())
       )
     : trails;
-
-  const handleClick = (trailId) => {
-    // Aqui pode adicionar a lógica de navegação ou outra ação
-  };
 
   return (
     <div>
@@ -47,11 +48,13 @@ function Home() {
           </div>        
         </div>
 
-        {/* Lista de Trilhas */}
+        {/* Exibe mensagem de carregamento ou trilhas */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {filteredTrails.length > 0 ? (
+          {loading ? (
+            <p className="col-span-full text-center text-gray-500">Carregando...</p>
+          ) : filteredTrails.length > 0 ? (
             filteredTrails.map(trail => (
-              <div key={trail.id} onClick={() => handleClick(trail.id)} className="cursor-pointer">
+              <div key={trail.id} className="cursor-pointer">
                 <CardTrilha trilha={trail} />
               </div>
             ))
